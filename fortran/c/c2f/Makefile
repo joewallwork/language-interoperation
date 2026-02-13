@@ -9,3 +9,5 @@ build:
 
 clean:
 	rm -f *.o c2f
+
+.PHONY: all build clean
