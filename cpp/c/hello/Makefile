@@ -1,9 +1,15 @@
 all: clean build
 
+CC	= gcc
 CXX	= g++
 
-build:
-	$(CXX) hello.cpp -o hello
+build: hello.o hello.cpp
+	$(CXX) hello.o hello.cpp -o hello
+
+hello.o: hello.c hello.h
+	$(CC) -c hello.c -o hello.o
 
 clean:
-	rm -f *.mod *.o hello
+	rm -f *.o hello
+
+.PHONY: all build clean
