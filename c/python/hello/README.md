@@ -24,7 +24,7 @@ We can run it with
 ```sh
 python3 setup.py build_ext --inplace
 ```
-This will print some rather cryptic output to the terminal:
+This will print some rather cryptic compiler output to the terminal:
 ```
 Compiling hello.py because it changed.
 [1/1] Cythonizing hello.py
@@ -35,8 +35,6 @@ mpicc -fno-strict-overflow -Wsign-compare -DNDEBUG -g -O2 -Wall -fPIC -I/home/us
 creating build/lib.linux-x86_64-cpython-312
 mpicc -shared -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-Bsymbolic-functions -Wl,-z,relro -g -fwrapv -O2 build/temp.linux-x86_64-cpython-312/hello.o -L/usr/lib/x86_64-linux-gnu -o build/lib.linux-x86_64-cpython-312/hello.cpython-312-x86_64-linux-gnu.so
 copying build/lib.linux-x86_64-cpython-312/hello.cpython-312-x86_64-linux-gnu.so ->
-```
-```
 ```
 This creates several files in the current directory, including the
 auto-generated `hello.c` file, the compiled
