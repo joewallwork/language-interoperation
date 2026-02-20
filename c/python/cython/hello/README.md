@@ -41,7 +41,9 @@ copying build/lib.linux-x86_64-cpython-312/hello.cpython-312-x86_64-linux-gnu.so
 This creates several files in the current directory, including the
 auto-generated `hello.c` file, the compiled
 `hello.cpython-312-x86_64-linux-gnu.so` shared library, and some build
-artifacts inside the `build/` directory.
+artifacts inside the `build/` directory. Note that the shared library name
+depends on several factors including computer architecture, operating system,
+C compiler, and Python version, so it may look different on your machine.
 
 We can then import the compiled module in Python. This is done in the
 `say_hello.py` file:
@@ -55,3 +57,54 @@ directly, which can also be imported in this way? To convince yourself that the
 Cythonized version is actually being used, try deleting or renaming the
 `hello.py` file. You should find that running `say_hello.py` still works, which
 means that the compiled version is being used.
+
+This is great but we wanted to call Python from C, not Python. To do that, we
+need to do a bit more work. First, link the shared library for convenience:
+```sh
+ln -s hello.cpython-312-x86_64-linux-gnu.so libhello.so
+```
+Then, we can make use of the `hello` module in the C code in `say_hello.c` - a
+small program that embeds the Python interpreter and imports the compiled Cython
+extension module `hello`:
+```c
+#include <Python.h>
+
+int main()
+{
+    // Initialize the Python interpreter
+    Py_InitializeEx(0);
+
+    // Try importing the compiled extension module named 'hello'
+    PyObject *pModule = PyImport_ImportModule("hello");
+
+    // Handle failure cases
+    if (pModule == NULL) {
+        // Print the Python error (e.g., ModuleNotFoundError) to stderr
+        PyErr_Print();
+        // Finalize and exit with non-zero exit code to indicate failure
+        Py_FinalizeEx();
+        return 2;
+    }
+
+    // Release the reference to the module and exit
+    Py_DECREF(pModule);
+
+    // Finalize the Python interpreter
+    Py_FinalizeEx();
+
+    return 0;
+}
+```
+Do this with
+```
+gcc say_hello.c $(python3-config --cflags --ldflags) -lpython3.12 -L. -lhello -o say_hello
+```
+assuming that you are using Python 3.12. (Modify the link flag as appropriate if
+not.) Having done this, you should have an executable called `say_hello`. To run
+it, you need to ensure that the current directory is in the Python path, so run
+the executable with
+```sh
+PYTHONPATH=. ./say_hello
+```
+This should print the same greeting to the console, but this time it is the C
+code that is calling the Python code in the Cython extension module!

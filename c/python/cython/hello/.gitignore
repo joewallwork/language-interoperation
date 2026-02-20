@@ -1,3 +1,4 @@
 build/
-*.c
+hello.c
+say_hello
 *.so
