@@ -4,5 +4,6 @@ Subdirectories correspond to examples involving calling other languages from C.
 
 ## Contents
 
+* [C++](./cpp)
 * [Fortran](./fortran)
 * [Python](./python)

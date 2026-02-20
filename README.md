@@ -7,6 +7,7 @@ languages.
 ## Contents
 
 * [C](./c)
+  * [Calling C++ from C](./c/cpp)
   * [Calling Fortran from C](./c/fortran)
   * [Calling Python from C](./c/python)
 * [C++](./cpp)
