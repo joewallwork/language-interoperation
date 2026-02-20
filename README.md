@@ -8,6 +8,7 @@ languages.
 
 * [C](./c)
   * [Calling Fortran from C](./c/fortran)
+  * [Calling Python from C](./c/python)
 * [C++](./cpp)
   * [Calling C from C++](./cpp/c)
 * [Fortran](./fortran)
