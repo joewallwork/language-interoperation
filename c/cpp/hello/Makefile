@@ -11,3 +11,5 @@ build:
 	$(CXX) -c hello.cpp
 	$(CC) -c main.c
 	$(CXX) hello.o main.o -o say_hello
+
+.PHONY: clean build
