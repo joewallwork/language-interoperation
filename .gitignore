@@ -1,3 +1,13 @@
+# Subdirectories
+CMakeFiles/
+
+# File extensions
+*.cmake
 *.mod
 *.o
 *.out
+*.so
+
+# Specific filenames
+CMakeCache.txt
+Makefile
