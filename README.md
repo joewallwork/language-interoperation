@@ -12,10 +12,16 @@ languages.
   * [Calling Python from C](./c/python)
 * [C++](./cpp)
   * [Calling C from C++](./cpp/c)
+  * [Calling Fortran from C++](./cpp/fortran)
+  * [Calling Python from C++](./cpp/python)
 * [Fortran](./fortran)
   * [Calling C from Fortran](./fortran/c)
+  * [Calling C++ from Fortran](./fortran/cpp)
+  * [Calling Python from Fortran](./fortran/python)
 * [Python](./python)
   * [Calling C from Python](./python/c)
+  * [Calling C++ from Python](./python/cpp)
+  * [Calling Fortran from Python](./python/fortran)
 
 ## Setup
 

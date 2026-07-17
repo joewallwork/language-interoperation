@@ -6,3 +6,5 @@ C++.
 ## Contents
 
 * [C](./c)
+* [Fortran](./fortran)
+* [Python](./python)
